@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue-test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{fullName}}
+</div>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data () {
+            return {
+                msg: 'hello, ',
+                firstName: '小',
+                lastName: '明',
+                fullName: ''
+            }
+        },
+        // computed: {
+        //     // 计算属性依赖缓存 如果值没有变化 不会更新数据
+        //     fullName () {
+        //         return this.firstName + this.lastName
+        //     }
+        // },
+        watch: {
+            // 是异步的 还可以做一些小功能
+            // vm.$watch('firstName", ()=>({}))
+            // firstName () {
+            //     this.getFullName()
+            // }
+            firstName:{
+                handler(newValue) {
+                    this.getFullName()
+                },
+                immediate: true
+            }
+        },
+        methods: {
+            getFullName () {
+                this.fullName = this.firstName + this.lastName
+            }
+        },
+        mounted () {
+            // this.getFullName()
+        }
+    })
+</script>
+</body>
+</html>
